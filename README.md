@@ -6,6 +6,7 @@ This is the code for Boundary Neural Fields globalization method. The technical 
 ## Installation
 
 1. VL Feat
+
 	Compile the VL Feat library in the folder 'libs/'
 
 2. Normalized Cuts
