@@ -1,0 +1,81 @@
+%function [W,imageEdges] = ICgraph(I,dataW,dataEdgemap);
+function [W,imageEdges] = ICgraph(I_pred,I_rgb,I_seg,dataW,dataEdgemap);
+
+% [W,imageEdges] = ICgraph(I,dataW,dataEdgemap);
+% Input:
+% I = gray-level image
+% optional parameters: 
+% dataW.sampleRadius=10;
+% dataW.sample_rate=0.3;
+% dataW.edgeVariance = 0.1;
+% 
+% dataEdgemap.parametres=[4,3, 21,3];%[number of filter orientations, number of scales, filter size, elongation]
+% dataEdgemap.threshold=0.02;
+% 
+% Output: 
+% W: npixels x npixels similarity matrix based on Intervening Contours
+% imageEdges: image showing edges extracted in the image
+%
+% Timothee Cour, Stella Yu, Jianbo Shi, 2004.
+
+
+
+[p,q] = size(I_pred);
+
+if (nargin< 4) | isempty(dataW),
+    dataW.sampleRadius=2;
+    dataW.sample_rate=1;
+    dataW.edgeVariance = 0.1;
+
+    %dataW.sampleRadius=10;
+    %dataW.sample_rate=0.75;
+    %dataW.edgeVariance = 0.1;
+
+end
+
+if (nargin<5) | isempty(dataEdgemap),
+    dataEdgemap.parametres=[4,3, 21,3];%[number of filter orientations, number of scales, filter size, elongation]
+    dataEdgemap.threshold=0.02;
+end
+
+fprintf('Computing edge map...\n');
+edgemap = computeEdges(I_rgb,dataEdgemap.parametres,dataEdgemap.threshold);
+%edgemap = computeEdges(I_pred,dataEdgemap.parametres,dataEdgemap.threshold);
+
+
+%imageEdges=I_pred;
+%edgemap.emag=I_pred;
+%edgemap.ephase=I_seg;
+
+%edgemap.emag=I_pred;
+imageEdges = edgemap.imageEdges;
+
+%edgemap.ephase=rand(size(I_pred,1),size(I_pred,2));
+%imageEdges=imageEdges/max(imageEdges(:))*255;
+%imwrite(uint8(imageEdges),'test.png');
+
+if 0
+[cur_row,cur_col]=find(max(imageEdges(:))==imageEdges);
+stride=4;
+mini_r1=max(cur_row-stride,1);
+mini_c1=max(cur_col-stride,1);
+mini_r2=min(cur_row+stride,size(I_pred,1));
+mini_c2=min(cur_col+stride,size(I_pred,2));
+
+phase_patch=edgemap.ephase(mini_r1:mini_r2,mini_c1:mini_c2);
+mag_patch=edgemap.emag(mini_r1:mini_r2,mini_c1:mini_c2);
+
+disp(phase_patch);
+disp(mag_patch);
+end
+
+%edgemap.ephase=zeros(size(edgemap.ephase));
+
+fprintf('Computing affinity matrix...\n');
+
+ephase=ones(size(I_pred))*-1;
+ephase(I_pred>0)=1;
+
+W = computeW(I_pred,dataW,I_pred,ephase);
+%W = computeW(I_pred,dataW,edgemap.emag,edgemap.ephase);
+fprintf('Done\n');
