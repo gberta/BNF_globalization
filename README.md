@@ -5,20 +5,18 @@ This is the code for Boundary Neural Fields globalization method. The technical 
 If you use this software please cite our CVPR 2016 paper:
 
 @InProceedings{gberta_2016_CVPR, 
+
 author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},
+
 title = {Semantic Segmentation with Boundary Neural Fields},
+
 booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+
 month = {June},
+
 year = {2016}
 }
 
-@InProceedings{gberta_2015_ICCV,
-author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},
-title = {High-for-Low and Low-for-High: Efficient Boundary Detection from Deep Object Features and its Applications to High-Level Vision},
-booktitle = {The IEEE International Conference on Computer Vision (ICCV)},
-month = {December},
-year = {2015}
-}
 
 
 ## Installation
