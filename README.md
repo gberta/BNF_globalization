@@ -4,12 +4,12 @@ This is the code for Boundary Neural Fields globalization method. The technical 
 
 If you use this software please cite our CVPR 2016 paper:
 
-@InProceedings{gberta_2016_CVPR, 
-author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},
-title = {Semantic Segmentation with Boundary Neural Fields},
-booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-month = {June},
-year = {2016}
+@InProceedings{gberta_2016_CVPR,<br />
+author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},<br />
+title = {Semantic Segmentation with Boundary Neural Fields},<br />
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},<br />
+month = {June},<br />
+year = {2016}<br />
 }
 
 
