@@ -12,6 +12,14 @@ month = {June},
 year = {2016}
 }
 
+@InProceedings{gberta_2015_ICCV,
+author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},
+title = {High-for-Low and Low-for-High: Efficient Boundary Detection from Deep Object Features and its Applications to High-Level Vision},
+booktitle = {The IEEE International Conference on Computer Vision (ICCV)},
+month = {December},
+year = {2015}
+}
+
 
 ## Installation
 
