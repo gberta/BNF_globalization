@@ -2,7 +2,7 @@
 
 This is the code for Boundary Neural Fields globalization method. The technical report of the method can be found at http://arxiv.org/pdf/1511.02674v1.pdf 
 
-If you use this software please cite our paper:
+If you use this software please cite our CVPR 2016 paper:
 
 @InProceedings{gberta_2016_CVPR, 
 author = {Gedas Bertasius and Jianbo Shi and Lorenzo Torresani},
