@@ -87,7 +87,7 @@ function BNF_multi_class_demo()
 
             load(unary_file);
 
-            %% ASSUMING THAT THE LOADED FILE WILL SHOP UP WITH THE FIELD 'data'
+            %% ASSUMING THAT THE LOADED FILE WILL SHOW UP WITH THE FIELD 'data'
             ch=size(data,3);
 
             [V,I]=max(data,[],3);
@@ -214,12 +214,12 @@ function BNF_multi_class_demo()
 
                 [~,S]=max(F,[],2);
                 S=reshape(S,[h w]);
-                S(bg_ind)=1;
+                S(bg_ind)=0;
             end
             
             fprintf('Done\n');
 
-            temp=cat(2,I-1,S-1);
+            temp=cat(2,I-1,S);
             imshow(temp,colormap);
             %pause(3)
             %output_path=[output_dir nm '.png'];
