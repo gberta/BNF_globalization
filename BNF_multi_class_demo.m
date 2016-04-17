@@ -199,6 +199,7 @@ function BNF_multi_class_demo()
             if ~strcmp(type,'aggressive')
   
                 S=reshape(S,[h w]);
+                S=S-1;
             else
                 bg_ind=find(S==1);
                 F=zeros(n,ch);
