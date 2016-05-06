@@ -216,6 +216,7 @@ function BNF_multi_class_demo()
                 [~,S]=max(F,[],2);
                 S=reshape(S,[h w]);
                 S(bg_ind)=0;
+                S=max(S-1,0);
             end
             
             fprintf('Done\n');
