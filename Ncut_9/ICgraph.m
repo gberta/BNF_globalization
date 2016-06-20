@@ -78,5 +78,5 @@ dataW.sample_rate=0.1;
 %dataW.sample_rate=1;
 
 ephase=edgemap.ephase;
-W2 = computeW(1,I,dataW,edgemap.emag,edgemap.ephase);
-W=W2;
+W = computeW(1,I,dataW,edgemap.emag,edgemap.ephase);
+%W=W2;

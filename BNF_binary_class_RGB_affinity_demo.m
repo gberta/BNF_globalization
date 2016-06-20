@@ -10,20 +10,16 @@ function BNF_binary_class_demo()
 
     run(setup_path);
 
-    run('vl_setupnn.m');
-
     %% INPUT PARAMS %%
 
     root_dir='binary_class_data/';
                        
-    edge_dir=[root_dir 'edges/'];
     img_dir=[root_dir 'images/'];
     unary_dir=[root_dir 'unary_data/']; %unary potential files must be stored as 
                              %HxW matrix with foreground probabilities
                              %H-height, W-width
 
-        
-    sp_size=10;
+
     TH=1; %descides how aggressively to cut
             %higher threshold meeans less cutting
   
@@ -35,7 +31,8 @@ function BNF_binary_class_demo()
     mu=0.025; %lower mu puts more weight on pairwise cost, 
               %higher mu puts more cost on unary cost
     alpha=1/(1+mu);
-    beta=mu/(1+mu);   
+    beta=mu/(1+mu); 
+    sigma=30.0;
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -55,12 +52,11 @@ function BNF_binary_class_demo()
         fprintf('Processing file %s %d / %d\n',nm,file_no,numel(files));
 
         im_file=strcat(img_dir,nm,'.jpg');
-        edge_file=strcat(edge_dir,nm,'.jpg');
         unary_file=strcat(unary_dir,nm,'.mat');
 
 
 
-        if exist(unary_file) && exist(edge_file)
+        if exist(unary_file)
 
 
             fprintf('File no %d File nm %s\n',file_no,nm);
@@ -68,17 +64,14 @@ function BNF_binary_class_demo()
 
             %im=imread(im_file);  
             im=read_img_rgb(im_file);
-            
-            sp_info=gen_supperpixel_info(im, sp_size);
-            sp_map=sp_info.sp_ind_map;
-        
+     
 
             h=size(im,1);
             w=size(im,2);
 
             n=h*w;
 
-            edge_im=im2double(imread(edge_file));
+            edge_im=randi(2,[h w]);
 
             load(unary_file);
     
@@ -90,17 +83,21 @@ function BNF_binary_class_demo()
 
             [W,~]=get_my_W(im,edge_im);
 
-            [ii,jj,v_ic]=find(W);
+            [ii,jj,~]=find(W);
             
-            v=ones(size(ii,1),1);
-            v(sp_map(ii)~=sp_map(jj))=v_ic(sp_map(ii)~=sp_map(jj));
+            %% RGB AFFINITIES
+            
+            im_r=double(im(:,:,1))/sigma;
+            im_g=double(im(:,:,2))/sigma;
+            im_b=double(im(:,:,3))/sigma;
 
+            v_r=(im_r(ii)-im_r(jj)).^2;
+            v_g=(im_g(ii)-im_g(jj)).^2;
+            v_b=(im_b(ii)-im_b(jj)).^2;
+
+            v=exp(-(v_r+v_g+v_b));
 
             %% Building single affinity matrix
-
-            
-            %I_ii=I(ii);
-            %I_jj=I(jj);
             
             v_unary=get_fc8_w(ii,jj,data);
       
