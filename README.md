@@ -26,8 +26,7 @@ year = {2016}<br />
 
 ## Usage
 
-Check out files 'BNF_binary_class_demo.m' and 'BNF_multi_class_demo.m' for binary and multi class segmentations respectively.
-
+To use BNF method with the boundary based affinities, check out the files 'BNF_binary_class_edge_affinity_demo.m' and 'BNF_multi_class_edge_affinity_demo.m' for binary and multi class segmentations respectively. If the boundaries are not available, you can use the demos 'BNF_binary_class_RGB_affinity_demo.m' and 'BNF_multi_class_RGB_affinity_demo.m', which perform our globalization technique using the RGB color affinities. 
 
 ## Notes
 
